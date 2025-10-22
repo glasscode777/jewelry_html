@@ -188,19 +188,39 @@
         perspective: 1000px;
       }
       .slide-media {
-        position: absolute;
-        inset: 0;
-        background-position: center;
-        background-size: cover;
-        transition: transform 0.8s var(--ease), filter 0.8s var(--ease),
-          opacity 0.6s var(--ease);
-        filter: saturate(96%) contrast(102%);
+        position: relative;   /* 不要再用 absolute */
+        width: 100%;
+        height: 100%;
+        overflow: hidden;     /* 保持邊界 */
+        height: 62vh;   /* 這會隨視窗高度改變 */
+        min-height: 420px;
+        max-height: 760px;
+      }
+      .slide-media img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;    /* 圖片不會放大縮小(亦不會填滿) */
+        display: block;
+        border-radius: 18px
+        
       }
       /* 側掀式效果 */
       .slide:hover .slide-media,
       .slide.is-active .slide-media {
         transform: rotateY(-9deg) translateZ(0) scale(1.02);
         filter: saturate(105%) contrast(106%) brightness(1.02);
+      }
+      .slide:nth-child(1) .slide-media {
+        aspect-ratio: 1024 / 981;   /* 接近正方形 */
+      }
+
+      .slide:nth-child(2) .slide-media {
+        aspect-ratio: 1536 / 852;   /* 橫幅 */
+      }
+
+      .slide:nth-child(3) .slide-media,
+      .slide:nth-child(4) .slide-media {
+         aspect-ratio: 1024 / 1536;  /* 直幅 */
       }
       .badge {
         position: absolute;
@@ -412,79 +432,58 @@
           私人訂製僅限邀請名額，提供全球禮賓交付。
         </p>
         <div class="specs">
-          <span class="chip">限量：88 件</span>
-          <span class="chip">材質：18K 金、訂製小牛皮</span>
+          <span class="chip">VIP會員限量：88 件</span>
+          <span class="chip">材質：24K 金、訂製小牛皮</span>
           <span class="chip">服務：終身保養、序號註冊</span>
         </div>
       </section>
 
-      <section id="gallery" class="container gallery-wrap">
-        <div class="gallery" aria-label="產品圖集">
-          <!-- Slide 1 -->
-          <article
-            class="slide is-active"
-            aria-roledescription="slide"
-            aria-label="正面輪廓"
-          >
-            <div
-              class="slide-media"
-              style="
-                background-image: url('https://images.unsplash.com/photo-1512496015851-a90fb38ba796?q=80&w=2000&auto=format&fit=crop');
-              "
-            ></div>
-            <div class="badge">No. 01</div>
-            <div class="caption">正面輪廓：克制線條，黃金比例裁切。</div>
-          </article>
-          <!-- Slide 2 -->
-          <article
-            class="slide"
-            aria-roledescription="slide"
-            aria-label="工藝細節"
-          >
-            <div
-              class="slide-media"
-              style="
-                background-image: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2000&auto=format&fit=crop');
-              "
-            ></div>
-            <div class="badge">No. 02</div>
-            <div class="caption">
-              工藝細節：手工縫線與拋光邊油，肉眼可辨的精密。
-            </div>
-          </article>
-          <!-- Slide 3 -->
-          <article
-            class="slide"
-            aria-roledescription="slide"
-            aria-label="珍稀材質"
-          >
-            <div
-              class="slide-media"
-              style="
-                background-image: url('https://images.unsplash.com/photo-1516239322130-047f61901f1a?q=80&w=2000&auto=format&fit=crop');
-              "
-            ></div>
-            <div class="badge">No. 03</div>
-            <div class="caption">珍稀材質：18K 金屬件，溫潤色澤與觸感。</div>
-          </article>
-          <!-- Slide 4 -->
-          <article
-            class="slide"
-            aria-roledescription="slide"
-            aria-label="配戴視覺"
-          >
-            <div
-              class="slide-media"
-              style="
-                background-image: url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=2000&auto=format&fit=crop');
-              "
-            ></div>
-            <div class="badge">No. 04</div>
-            <div class="caption">
-              配戴視覺：進入生活的那一刻，完成最後一筆。
-            </div>
-          </article>
-        </div>
+     <section id="gallery" class="container gallery-wrap">
+  <div class="gallery" aria-label="產品圖集">
+    <!-- Slide 1 -->
+    <article class="slide" aria-roledescription="slide" aria-label="正面輪廓">
+      <div class="slide-media">
+        <img 
+        src="images/bluerubby.jpg" 
+        alt="正面輪廓"/>
+      </div>
+      <div class="badge">No. 01</div>
+      <div class="caption">正面輪廓：克制線條，黃金比例裁切。</div>
+    </article>
+
+    <!-- Slide 2 -->
+    <article class="slide" aria-roledescription="slide" aria-label="工藝細節">
+      <div class="slide-media">
+        <img src="images/goldwatch.jpg" alt="工藝細節" />
+      </div>
+      <div class="badge">No. 02</div>
+      <div class="caption">工藝細節：手工縫線與拋光邊油，肉眼可辨的精密。</div>
+    </article>
+
+    <!-- Slide 3 -->
+    <article class="slide" aria-roledescription="slide" aria-label="珍稀材質">
+      <div class="slide-media">
+        <img src="images/man_watch.jpg" alt="珍稀材質" />
+      </div>
+      <div class="badge">No. 03</div>
+      <div class="caption">珍稀材質：18K 金屬件，溫潤色澤與觸感。</div>
+    </article>
+
+    <!-- Slide 4 -->
+    <article class="slide" aria-roledescription="slide" aria-label="配戴視覺">
+      <div class="slide-media">
+        <img src="images/marry.jpg" alt="配戴視覺"/>
+      </div>
+      <div class="badge">No. 04</div>
+      <div class="caption">配戴視覺：百年工藝進入生活，人生注定不太平凡。</div>
+    </article>
+  </div>
+
+  <div class="nav-arrows" aria-hidden="false">
+    <button class="arrow" id="prev" aria-label="上一張" title="上一張">❮</button>
+    <button class="arrow" id="next" aria-label="下一張" title="下一張">❯</button>
+  </div>
+</section>
 
         <div class="nav-arrows" aria-hidden="false">
           <button class="arrow" id="prev" aria-label="上一張" title="上一張">
