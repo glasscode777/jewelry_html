@@ -1,0 +1,16 @@
+.slide-media {
+    position: relative;
+    inset: unset;
+    background: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slide-media img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    position: relative;
+    z-index: 1;
+}
